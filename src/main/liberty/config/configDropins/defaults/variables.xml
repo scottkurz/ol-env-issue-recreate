@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<server description="variables">
-    <variable defaultValue="localhost" name="sn"/>
-    <variable defaultValue="{aes}AL38H5t7Lb9oOY0NqQt5bWHTcQMM/z0wqwvDJDWLgZiA" name="db_password"/>
-</server>
