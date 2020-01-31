@@ -1,57 +1,38 @@
-# MicroProfile generated Application
+# Issue recreate instructions:
 
-## Introduction
+1. Clone
+    > git clone git@github.com:scottkurz/ol-env-issue-recreate.git; cd ol-env-issue-recreate
 
-MicroProfile Starter has generated this MicroProfile application for you.
+2. Set env vars:
+    > export avar=a1 bvar=b1
 
-The generation of the executable jar file can be performed by issuing the following command
+3. Build and start server
+    > mvn package liberty:start
 
-    mvn clean package
+4. Hit the endpoint:
+   >  curl -sk https://localhost:9443/ibm/api/config/dataSource/DefaultDataSource -u apps:ody | grep -E '(customProp|serverName)'
 
-This will create an executable jar file **demo.jar** within the _target_ maven folder. This can be started by executing the following command
+and view the output:
 
-    java -jar target/demo.jar
+    "customProp": "b1",
+    "serverName": "a1",
 
+5. Set env vars to new values
+    > export avar=a2 bvar=b2
 
-### Liberty Dev Mode
+6. Switch to target directory
+>  cd target/liberty/wlp/
 
-During development, you can use Liberty's development mode (dev mode) to code while observing and testing your changes on the fly.
-With the dev mode, you can code along and watch the change reflected in the running server right away; 
-unit and integration tests are run on pressing Enter in the command terminal; you can attach a debugger to the running server at any time to step through your code.
+7. Start server
+> ./bin/server start demo
 
-    mvn liberty:dev
+8. Hit the endpoint again
 
+   >  curl -sk https://localhost:9443/ibm/api/config/dataSource/DefaultDataSource -u apps:ody | grep -E '(customProp|serverName)'
 
+and view the output:
 
-To launch the test page, open your browser at the following URL
+    "customProp": "b1",
+    "serverName": "a1",
 
-    http://localhost:9080/index.html
-
-## Specification examples
-
-By default, there is always the creation of a JAX-RS application class to define the path on which the JAX-RS endpoints are available.
-
-Also, a simple Hello world endpoint is created, have a look at the class **HelloController**.
-
-More information on MicroProfile can be found [here](https://microprofile.io/)
-
-
-
-
-
-
-### Health
-
-The health status can be used to determine if the 'computing node' needs to be discarded/restarted or not. Specification [here](https://microprofile.io/project/eclipse/microprofile-health)
-
-The class **ServiceHealthCheck** contains an example of a custom check which can be integrated to health status checks of the instance.  The index page contains a link to the status data.
-
-
-
-
-
-
-
-
-
-
+9. Observe this is wrong :) 
